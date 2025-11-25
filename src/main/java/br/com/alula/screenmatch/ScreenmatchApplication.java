@@ -1,18 +1,13 @@
 package br.com.alula.screenmatch;
 
-import br.com.alula.screenmatch.model.DadosEpisodio;
-import br.com.alula.screenmatch.model.DadosSerie;
-import br.com.alula.screenmatch.service.ConsumoApi;
-import br.com.alula.screenmatch.service.ConverteDados;
+import br.com.alula.screenmatch.model.DadosTemporada;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import principal.Principal;
 
-import java.io.IOException;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
+import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootApplication
 public class ScreenmatchApplication  implements CommandLineRunner {
@@ -24,21 +19,13 @@ public class ScreenmatchApplication  implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        var consumoApi =  new ConsumoApi();
-        var json = consumoApi.obterDados("https://www.omdbapi.com/?t=gilmore+girls&apikey=48b3fc4d");
-        System.out.println(json);
 
-        //json = consumoApi.obterDados("https://coffee.alexflipnote.dev/random.json");
-        //System.out.println(json);
+        Principal principal = new Principal();
 
-        ConverteDados conversor = new ConverteDados();
-        DadosSerie dados = conversor.obterDados(json, DadosSerie.class);
-        System.out.println(dados);
+        principal.exibeMenu();
 
-        json = consumoApi.obterDados("https://omdbapi.com/?t=gilmore+girls&season=1&episode=21&apikey=48b3fc4d");
-        DadosEpisodio dadosEpisodio = conversor.obterDados(json, DadosEpisodio.class);
 
-        System.out.println(dadosEpisodio);
+
 
     }
 
